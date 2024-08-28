@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://kekbk8lpsn2d"]
+
+[ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_stewb"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_67nfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmhea"]
+size = Vector2(16, 648)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xfhi4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_agpry"]
+normal = Vector2(0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3cks8"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_stewb")]
+position = Vector2(579, 538)
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.812067, 0.768118, 1, 1)
+z_index = -10
+position = Vector2(501, 384)
+scale = Vector2(1500, 1000)
+texture = SubResource("CanvasTexture_67nfp")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(184, 324)
+shape = SubResource("RectangleShape2D_fmhea")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2(968, 324)
+shape = SubResource("RectangleShape2D_fmhea")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+position = Vector2(576, 648)
+shape = SubResource("WorldBoundaryShape2D_xfhi4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
+position = Vector2(576, -1)
+shape = SubResource("WorldBoundaryShape2D_agpry")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.194349, 0.194349, 0.194349, 1)
+z_index = -1
+position = Vector2(-208, 304)
+scale = Vector2(800, 800)
+texture = SubResource("CanvasTexture_3cks8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.196078, 0.196078, 0.196078, 1)
+z_index = -1
+position = Vector2(1360, 312)
+scale = Vector2(800, 800)
+texture = SubResource("CanvasTexture_3cks8")

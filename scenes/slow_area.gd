@@ -26,6 +26,5 @@ func _on_body_exited(body: Node2D) -> void:
 
 func calculate_slowdown(other_position: Vector2) -> float:
 	var distance: float = position.distance_to(other_position);
-	circle_shape.radius;
 	var slowdown: float = clamp(distance/circle_shape.radius, 0.0, 1.0);
 	return slowdown;

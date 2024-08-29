@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://kekbk8lpsn2d"]
+[gd_scene load_steps=12 format=3 uid="uid://kekbk8lpsn2d"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_6v4ou"]
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_stewb"]
 [ext_resource type="PackedScene" uid="uid://d37rpormu6y1q" path="res://scenes/slow_area.tscn" id="3_vw2np"]
+[ext_resource type="Script" path="res://scenes/EnemyPath2D.gd" id="4_5axwt"]
 [ext_resource type="PackedScene" uid="uid://k2lcoq6ljn54" path="res://scenes/enemy_simple.tscn" id="4_emuwi"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_67nfp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmhea"]
-size = Vector2(16, 1024)
+size = Vector2(16, 1080)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xfhi4"]
 distance = -64.0
@@ -17,6 +18,12 @@ distance = -64.0
 normal = Vector2(0, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_3cks8"]
+
+[sub_resource type="Curve2D" id="Curve2D_c6lse"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 515, -103, 0, 0, 0, 0, 595, 86, 0, 0, 0, 0, 867, 221, 0, 0, 0, 0, 948, 361, 0, 0, 0, 0, 643, 531, 0, 0, 0, 0, 401, 600, 0, 0, 0, 0, 216, 718, 0, 0, 0, 0, -79, 745)
+}
+point_count = 8
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6v4ou")
@@ -34,11 +41,11 @@ texture = SubResource("CanvasTexture_67nfp")
 [node name="Wall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-position = Vector2(56, 512)
+position = Vector2(56, 540)
 shape = SubResource("RectangleShape2D_fmhea")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
-position = Vector2(1096, 512)
+position = Vector2(1096, 540)
 shape = SubResource("RectangleShape2D_fmhea")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
@@ -64,7 +71,7 @@ scale = Vector2(800, 1928)
 texture = SubResource("CanvasTexture_3cks8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(576, 540)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 976.0
@@ -74,5 +81,18 @@ offset_bottom = 648.0
 [node name="Area2D" parent="." instance=ExtResource("3_vw2np")]
 position = Vector2(768, 448)
 
-[node name="EnemySimple" parent="." instance=ExtResource("4_emuwi")]
-position = Vector2(560, 272)
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_c6lse")
+
+[node name="EnemyPath2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(515, -103)
+rotates = false
+script = ExtResource("4_5axwt")
+
+[node name="EnemySimple" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
+
+[node name="EnemySimple2" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
+position = Vector2(140, 76)
+
+[node name="EnemySimple3" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
+position = Vector2(-138, 82)

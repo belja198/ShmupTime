@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://k2lcoq6ljn54"]
+
+[ext_resource type="Texture2D" uid="uid://b8epdr7gi8ww0" path="res://sprites/ship_50.png" id="1_pw2qr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2if1"]
+size = Vector2(128, 72)
+
+[node name="EnemySimple" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("1_pw2qr")
+flip_v = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_c2if1")

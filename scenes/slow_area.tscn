@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d37rpormu6y1q"]
+
+[ext_resource type="Script" path="res://scenes/slow_area.gd" id="1_knovp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7pxj"]
+radius = 96.0
+
+[sub_resource type="Gradient" id="Gradient_jeawb"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0y5g0"]
+gradient = SubResource("Gradient_jeawb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.821739, 0.721739)
+
+[node name="SlowArea" type="Area2D"]
+z_index = -5
+script = ExtResource("1_knovp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c7pxj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5.72205e-06, -5.72205e-06)
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_0y5g0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,17 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://kekbk8lpsn2d"]
+[gd_scene load_steps=8 format=3 uid="uid://kekbk8lpsn2d"]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1_6v4ou"]
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_stewb"]
-[ext_resource type="PackedScene" uid="uid://d37rpormu6y1q" path="res://scenes/slow_area.tscn" id="3_vw2np"]
-[ext_resource type="PackedScene" uid="uid://k2lcoq6ljn54" path="res://scenes/enemy_simple.tscn" id="4_emuwi"]
+[ext_resource type="PackedScene" uid="uid://dt24odnr0f10x" path="res://scenes/projectile.tscn" id="2_ykly8"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_67nfp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmhea"]
-size = Vector2(16, 1024)
+size = Vector2(16, 648)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xfhi4"]
-distance = -64.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_agpry"]
 normal = Vector2(0, 1)
@@ -19,30 +16,31 @@ normal = Vector2(0, 1)
 [sub_resource type="CanvasTexture" id="CanvasTexture_3cks8"]
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_6v4ou")
 
 [node name="Player" parent="." instance=ExtResource("1_stewb")]
-position = Vector2(576, 872)
+position = Vector2(579, 538)
+speed = null
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.812067, 0.768118, 1, 1)
 z_index = -10
-position = Vector2(501, 480)
-scale = Vector2(1500, 2096)
+position = Vector2(501, 384)
+scale = Vector2(1500, 1000)
 texture = SubResource("CanvasTexture_67nfp")
 
 [node name="Wall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-position = Vector2(56, 512)
+position = Vector2(184, 324)
 shape = SubResource("RectangleShape2D_fmhea")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
-position = Vector2(1096, 512)
+position = Vector2(968, 324)
 shape = SubResource("RectangleShape2D_fmhea")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
-position = Vector2(576, 960)
+position = Vector2(576, 648)
 shape = SubResource("WorldBoundaryShape2D_xfhi4")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
@@ -52,27 +50,16 @@ shape = SubResource("WorldBoundaryShape2D_agpry")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.194349, 0.194349, 0.194349, 1)
 z_index = -1
-position = Vector2(-336, 468)
-scale = Vector2(800, 1960)
+position = Vector2(-208, 304)
+scale = Vector2(800, 800)
 texture = SubResource("CanvasTexture_3cks8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 modulate = Color(0.196078, 0.196078, 0.196078, 1)
 z_index = -1
-position = Vector2(1488, 484)
-scale = Vector2(800, 1928)
+position = Vector2(1360, 312)
+scale = Vector2(800, 800)
 texture = SubResource("CanvasTexture_3cks8")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 976.0
-offset_right = 1152.0
-offset_bottom = 648.0
-
-[node name="Area2D" parent="." instance=ExtResource("3_vw2np")]
-position = Vector2(768, 448)
-
-[node name="EnemySimple" parent="." instance=ExtResource("4_emuwi")]
-position = Vector2(560, 272)
+[node name="Projectile" parent="." instance=ExtResource("2_ykly8")]
+position = Vector2(448, 576)

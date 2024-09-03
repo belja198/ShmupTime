@@ -4,6 +4,11 @@ class_name Player
 @export var speed: float = 400.0;
 @onready var firing_point: Node2D = $FirePoint;
 @export var my_time_scale: float = 1.0;
+@export var lives: int = 3;
+
+var first_hit_dettected: bool = false;
+var invincible: bool = false;
+
 
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
 
@@ -32,7 +37,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shoot();
 		
-	rich_text_label.text = str(my_time_scale);
+	rich_text_label.text = str(lives);
 
 
 

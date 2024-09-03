@@ -11,19 +11,19 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmhea"]
 size = Vector2(16, 1080)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xfhi4"]
-distance = -64.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1smu"]
+size = Vector2(1150, 20)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_agpry"]
-normal = Vector2(0, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cpa7"]
+size = Vector2(1155, 20)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_3cks8"]
 
 [sub_resource type="Curve2D" id="Curve2D_c6lse"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 515, -103, 0, 0, 0, 0, 595, 86, 0, 0, 0, 0, 867, 221, 0, 0, 0, 0, 948, 361, 0, 0, 0, 0, 643, 531, 0, 0, 0, 0, 401, 600, 0, 0, 0, 0, 216, 718, 0, 0, 0, 0, -79, 745)
+"points": PackedVector2Array(0, 0, 0, 0, 447, 147, 0, 0, 0, 0, 595, 86, 0, 0, 0, 0, 867, 221, 0, 0, 0, 0, 948, 361, 0, 0, 0, 0, 643, 531, 0, 0, 0, 0, 401, 600, 0, 0, 0, 0, 269, 417)
 }
-point_count = 8
+point_count = 7
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6v4ou")
@@ -49,23 +49,23 @@ position = Vector2(1096, 540)
 shape = SubResource("RectangleShape2D_fmhea")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
-position = Vector2(576, 960)
-shape = SubResource("WorldBoundaryShape2D_xfhi4")
+position = Vector2(576, -10)
+shape = SubResource("RectangleShape2D_v1smu")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
-position = Vector2(576, -1)
-shape = SubResource("WorldBoundaryShape2D_agpry")
+position = Vector2(576, 1090)
+shape = SubResource("RectangleShape2D_1cpa7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.194349, 0.194349, 0.194349, 1)
-z_index = -1
+z_index = 10
 position = Vector2(-336, 468)
 scale = Vector2(800, 1960)
 texture = SubResource("CanvasTexture_3cks8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 modulate = Color(0.196078, 0.196078, 0.196078, 1)
-z_index = -1
+z_index = 10
 position = Vector2(1488, 484)
 scale = Vector2(800, 1928)
 texture = SubResource("CanvasTexture_3cks8")
@@ -85,7 +85,7 @@ position = Vector2(768, 448)
 curve = SubResource("Curve2D_c6lse")
 
 [node name="EnemyPath2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(515, -103)
+position = Vector2(447, 147)
 rotates = false
 script = ExtResource("4_5axwt")
 

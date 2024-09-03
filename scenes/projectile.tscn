@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt24odnr0f10x"]
+[gd_scene load_steps=6 format=3 uid="uid://dt24odnr0f10x"]
 
 [ext_resource type="Texture2D" uid="uid://dsge8vh8bwobc" path="res://sprites/laserGreen02.png" id="1_41ucp"]
 [ext_resource type="Script" path="res://scenes/projectile.gd" id="1_aab8j"]
+[ext_resource type="PackedScene" uid="uid://d30dnmoaernkn" path="res://scenes/hurt_box.tscn" id="3_kobwj"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5lf0u"]
-radius = 3.0
-height = 28.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptlrq"]
+size = Vector2(6, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fj5bs"]
+size = Vector2(6, 28)
 
 [node name="Projectile" type="Area2D"]
 z_index = 4
+collision_mask = 2
 script = ExtResource("1_aab8j")
 projectile_speed = 450.0
 
@@ -16,5 +20,13 @@ projectile_speed = 450.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_41ucp")
 
+[node name="HurtBox" parent="." instance=ExtResource("3_kobwj")]
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_ptlrq")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_5lf0u")
+shape = SubResource("RectangleShape2D_fj5bs")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

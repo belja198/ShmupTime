@@ -20,9 +20,9 @@ size = Vector2(1155, 20)
 
 [sub_resource type="Curve2D" id="Curve2D_c6lse"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 447, 147, 0, 0, 0, 0, 595, 86, 0, 0, 0, 0, 867, 221, 0, 0, 0, 0, 948, 361, 0, 0, 0, 0, 643, 531, 0, 0, 0, 0, 401, 600, 0, 0, 0, 0, 209, 768)
+"points": PackedVector2Array(0, 0, 0, 0, 447, 147, -88, -4, 88, 4, 695, 75, 2, -138, -2, 138, 948, 361, 114, -54, -114, 54, 643, 531, 72, -88, -72, 88, 281, 775, 0, 0, 0, 0, -125, 871)
 }
-point_count = 7
+point_count = 6
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ii0lh"]
 normal = Vector2(0, 1)
@@ -73,7 +73,7 @@ scale = Vector2(800, 1928)
 texture = SubResource("CanvasTexture_3cks8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 540)
+position = Vector2(587, 540)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 976.0
@@ -90,12 +90,6 @@ script = ExtResource("4_5axwt")
 enemy_speed = 200.0
 
 [node name="EnemySimple" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
-
-[node name="EnemySimple2" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
-position = Vector2(140, 76)
-
-[node name="EnemySimple3" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
-position = Vector2(-138, 82)
 
 [node name="WallsForProjectiles" type="Area2D" parent="."]
 

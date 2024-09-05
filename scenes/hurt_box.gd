@@ -6,9 +6,9 @@ class_name HurtBox
 @export var damage: float = 0.0;
 
 func _ready() -> void:
-    if is_enemy_hurtbox:
-        set_collision_layer_value(6, 1);
-        set_collision_layer_value(5, 0);
-    else:
-        set_collision_layer_value(5, 1);
-        set_collision_layer_value(6, 0);
+	if is_enemy_hurtbox:
+		set_collision_layer_value(6, 1);
+		set_collision_layer_value(5, 0);
+	else:
+		set_collision_layer_value(5, 1);
+		set_collision_layer_value(6, 0);

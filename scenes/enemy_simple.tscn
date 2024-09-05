@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://k2lcoq6ljn54"]
+[gd_scene load_steps=8 format=3 uid="uid://k2lcoq6ljn54"]
 
 [ext_resource type="Script" path="res://scenes/enemy_simple.gd" id="1_flhax"]
 [ext_resource type="Texture2D" uid="uid://b8epdr7gi8ww0" path="res://sprites/ship_50.png" id="1_pw2qr"]
 [ext_resource type="PackedScene" uid="uid://c765crg3vfh0t" path="res://scenes/health_box.tscn" id="3_6uw1d"]
+[ext_resource type="Script" path="res://scenes/hurt_box.gd" id="4_g1yu5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2if1"]
 size = Vector2(128, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smy83"]
+size = Vector2(128, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tbq4"]
 size = Vector2(128, 72)
 
 [node name="EnemySimple" type="Area2D" groups=["enemies"]]
@@ -28,7 +32,16 @@ shape = SubResource("RectangleShape2D_c2if1")
 [node name="FirePoint" type="Node2D" parent="."]
 
 [node name="HealthBox" parent="." instance=ExtResource("3_6uw1d")]
+max_health = 800.0
 
 [node name="HitBox" type="CollisionShape2D" parent="HealthBox"]
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_smy83")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("4_g1yu5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_3tbq4")

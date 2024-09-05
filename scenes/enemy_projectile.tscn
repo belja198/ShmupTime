@@ -12,12 +12,9 @@ size = Vector2(8, 36)
 
 [node name="EnemyProjectile" type="Area2D"]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_ytgb3")
 projectile_speed = 300.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_pubi0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f2r32")
@@ -28,4 +25,8 @@ is_enemy_hurtbox = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_3bs1j")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pubi0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_player_entered"]

@@ -2,12 +2,19 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed: float = 400.0;
+
 @onready var firing_point: Node2D = $FirePoint;
+var can_shoot: bool = true;
+
 @export var my_time_scale: float = 1.0;
 @export var lives: int = 3;
 
-var first_hit_dettected: bool = false;
-var invincible: bool = false;
+@onready var coyote_timer: Timer = $CoyoteTimer;
+@onready var invincible_timer: Timer = $InvincibleTimer;
+@onready var shoot_timer: Timer = $ShootTimer;
+
+var is_coyote: bool = false;
+var is_invincible: bool = false;
 
 
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
@@ -19,12 +26,25 @@ func _physics_process(delta: float) -> void:
 	#var mouse_vector: Vector2 = get_viewport().get_mouse_position();	#speed should be 15
 	GlobalScript.world_time_scale = my_time_scale;
 	
-	var direction_x: float;
-	var direction_y: float;
+	var direction_x: float = 0;
+	var direction_y: float = 0;
 	var move_vector: Vector2;
 	
-	direction_x = Input.get_axis("ui_left", "ui_right");
-	direction_y = Input.get_axis("move_up", "move_down");
+	if Input.is_action_pressed("move_right"):
+		direction_x += 1;
+
+	if Input.is_action_pressed("move_left"):
+		direction_x -= 1;
+
+	
+	if Input.is_action_pressed("move_down"):
+		direction_y += 1;
+
+	if Input.is_action_pressed("move_up"):
+		direction_y -= 1;
+
+	#direction_x = Input.get_axis("move_left", "move_right");
+	#direction_y = Input.get_axis("move_up", "move_down");
 	move_vector = Vector2(direction_x, direction_y);
 	move_vector = move_vector.normalized();
 	
@@ -34,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot") && can_shoot:
 		shoot();
 		
 	rich_text_label.text = str(lives);
@@ -45,5 +65,53 @@ func shoot() -> void:
 	var proj: Projectile = PROJECTILE.instantiate();
 	get_tree().get_root().add_child(proj);
 	proj.global_position = firing_point.global_position;
-	#print("Is in scene tree: ", proj.is_inside_tree())
+	can_shoot = false;
+	shoot_timer.start();
 
+
+
+func _on_hit_box_area_entered(area:Area2D) -> void:
+		if not area is HurtBox:
+			return;
+		get_hit();
+
+func get_hit() -> void:
+	if is_invincible:
+		return;
+
+	if !is_coyote:
+		is_coyote = true;
+		coyote_timer.start();
+		modulate.r = 1.0;
+		modulate.g = 0.0;
+		modulate.b = 0.0;
+	else:
+		# stop coyote timer
+		coyote_timer.stop();
+		lives = lives - 1;
+		if lives == 0:
+			print("DEAD");
+		is_coyote = false;
+		is_invincible = true;
+		invincible_timer.start();
+		modulate.r = 0.0;
+		modulate.g = 0.0;
+		modulate.b = 1.0;
+
+
+
+
+func _on_invincible_timer_timeout() -> void:
+	is_invincible = false;
+	modulate.r = 1.0;
+	modulate.g = 1.0;
+	modulate.b = 1.0;
+
+func _on_coyote_timer_timeout() -> void:
+	is_coyote = false;
+	modulate.r = 1.0;
+	modulate.g = 1.0;
+	modulate.b = 1.0;
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true;

@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://pgou6i4q6d0m"]
+[gd_scene load_steps=5 format=3 uid="uid://pgou6i4q6d0m"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_0i7nu"]
 [ext_resource type="Texture2D" uid="uid://x1e40rhqb4rj" path="res://sprites/1.png" id="2_q26hm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_en3pr"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kutu8"]
+
 [node name="Player" type="CharacterBody2D"]
 visibility_layer = 4
 z_index = 5
+collision_layer = 2
 script = ExtResource("1_0i7nu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -26,3 +29,24 @@ offset_left = -77.0
 offset_top = 25.0
 offset_right = 77.0
 offset_bottom = 65.0
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_kutu8")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="InvincibleTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

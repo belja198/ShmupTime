@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_6v4ou"]
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_stewb"]
-[ext_resource type="PackedScene" uid="uid://d37rpormu6y1q" path="res://scenes/slow_area.tscn" id="3_vw2np"]
 [ext_resource type="Script" path="res://scenes/EnemyPath2D.gd" id="4_5axwt"]
 [ext_resource type="PackedScene" uid="uid://k2lcoq6ljn54" path="res://scenes/enemy_simple.tscn" id="4_emuwi"]
 
@@ -21,9 +20,12 @@ size = Vector2(1155, 20)
 
 [sub_resource type="Curve2D" id="Curve2D_c6lse"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 447, 147, 0, 0, 0, 0, 595, 86, 0, 0, 0, 0, 867, 221, 0, 0, 0, 0, 948, 361, 0, 0, 0, 0, 643, 531, 0, 0, 0, 0, 401, 600, 0, 0, 0, 0, 269, 417)
+"points": PackedVector2Array(0, 0, 0, 0, 447, 147, 0, 0, 0, 0, 595, 86, 0, 0, 0, 0, 867, 221, 0, 0, 0, 0, 948, 361, 0, 0, 0, 0, 643, 531, 0, 0, 0, 0, 401, 600, 0, 0, 0, 0, 209, 768)
 }
 point_count = 7
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ii0lh"]
+normal = Vector2(0, 1)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6v4ou")
@@ -78,9 +80,6 @@ offset_left = 976.0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="Area2D" parent="." instance=ExtResource("3_vw2np")]
-position = Vector2(768, 448)
-
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_c6lse")
 
@@ -88,6 +87,7 @@ curve = SubResource("Curve2D_c6lse")
 position = Vector2(447, 147)
 rotates = false
 script = ExtResource("4_5axwt")
+enemy_speed = 200.0
 
 [node name="EnemySimple" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
 
@@ -96,3 +96,9 @@ position = Vector2(140, 76)
 
 [node name="EnemySimple3" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
 position = Vector2(-138, 82)
+
+[node name="WallsForProjectiles" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForProjectiles"]
+position = Vector2(587, -114)
+shape = SubResource("WorldBoundaryShape2D_ii0lh")

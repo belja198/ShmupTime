@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://kekbk8lpsn2d"]
+[gd_scene load_steps=13 format=3 uid="uid://kekbk8lpsn2d"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_6v4ou"]
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_stewb"]
 [ext_resource type="Script" path="res://scenes/EnemyPath2D.gd" id="4_5axwt"]
-[ext_resource type="PackedScene" uid="uid://k2lcoq6ljn54" path="res://scenes/enemy_simple.tscn" id="4_emuwi"]
+[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="4_ybxaq"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_67nfp"]
 
@@ -26,6 +26,8 @@ point_count = 6
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ii0lh"]
 normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7036d"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6v4ou")
@@ -73,7 +75,7 @@ scale = Vector2(800, 1928)
 texture = SubResource("CanvasTexture_3cks8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(587, 540)
+position = Vector2(594, 540)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 976.0
@@ -89,10 +91,14 @@ rotates = false
 script = ExtResource("4_5axwt")
 enemy_speed = 200.0
 
-[node name="EnemySimple" parent="Path2D/EnemyPath2D" instance=ExtResource("4_emuwi")]
+[node name="EnemyWide" parent="Path2D/EnemyPath2D" instance=ExtResource("4_ybxaq")]
 
 [node name="WallsForProjectiles" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForProjectiles"]
 position = Vector2(587, -114)
 shape = SubResource("WorldBoundaryShape2D_ii0lh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WallsForProjectiles"]
+position = Vector2(592, 1255)
+shape = SubResource("WorldBoundaryShape2D_7036d")

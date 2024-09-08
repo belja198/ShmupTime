@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c07ditq2pxsxt"]
+
+[ext_resource type="Script" path="res://scenes/enemy_base.gd" id="1_6y15b"]
+[ext_resource type="PackedScene" uid="uid://c765crg3vfh0t" path="res://scenes/health_box.tscn" id="2_mh4a7"]
+
+[node name="EnemyBase" type="Node2D"]
+script = ExtResource("1_6y15b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="HealthBox" parent="." instance=ExtResource("2_mh4a7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthBox"]

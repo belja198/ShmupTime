@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cu1qdt3u0crqo"]
+
+[ext_resource type="PackedScene" uid="uid://c07ditq2pxsxt" path="res://scenes/enemy_base.tscn" id="1_wnl4c"]
+[ext_resource type="Script" path="res://scenes/enemy_wide.gd" id="2_cdtok"]
+[ext_resource type="Texture2D" uid="uid://b8epdr7gi8ww0" path="res://sprites/ship_50.png" id="2_fjpww"]
+[ext_resource type="PackedScene" uid="uid://wyssqmiyv4rg" path="res://scenes/projectile_enemy_simple.tscn" id="4_i0la4"]
+[ext_resource type="PackedScene" uid="uid://dvy7na4ysyy8" path="res://scenes/shooter.tscn" id="4_v6b3q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o30es"]
+size = Vector2(128, 72)
+
+[node name="EnemyWide" instance=ExtResource("1_wnl4c")]
+script = ExtResource("2_cdtok")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -16)
+texture = ExtResource("2_fjpww")
+flip_v = true
+
+[node name="HealthBox" parent="." index="1"]
+max_health = 1600.0
+
+[node name="CollisionShape2D" parent="HealthBox" index="0"]
+shape = SubResource("RectangleShape2D_o30es")
+
+[node name="Shooter1" parent="." index="2" instance=ExtResource("4_v6b3q")]
+position = Vector2(-40, 55)
+projectile = ExtResource("4_i0la4")
+
+[node name="Shooter2" parent="." index="3" instance=ExtResource("4_v6b3q")]
+position = Vector2(40, 55)
+projectile = ExtResource("4_i0la4")

@@ -3,7 +3,8 @@ class_name Player
 
 @export var speed: float = 400.0;
 
-@onready var firing_point: Node2D = $FirePoint;
+@onready var firing_point_1: Node2D = $FirePoint1;
+@onready var firing_point_2: Node2D = $FirePoint2;
 var can_shoot: bool = true;
 
 @export var my_time_scale: float = 1.0;
@@ -19,7 +20,7 @@ var is_invincible: bool = false;
 
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
 
-const PROJECTILE: PackedScene = preload("res://scenes/projectile.tscn")
+const PROJECTILE: PackedScene = preload("res://scenes/projectile_player_first.tscn")
 
 func _physics_process(delta: float) -> void:
 	
@@ -62,18 +63,16 @@ func _process(delta: float) -> void:
 
 
 func shoot() -> void:
-	var proj: Projectile = PROJECTILE.instantiate();
-	get_tree().get_root().add_child(proj);
-	proj.global_position = firing_point.global_position;
+	var proj_1: ProjectileBase = PROJECTILE.instantiate();
+	get_tree().get_root().add_child(proj_1);
+	proj_1.global_position = firing_point_1.global_position;
+	var proj_2: ProjectileBase = PROJECTILE.instantiate();
+	get_tree().get_root().add_child(proj_2);
+	proj_2.global_position = firing_point_2.global_position;
+	
 	can_shoot = false;
 	shoot_timer.start();
 
-
-
-func _on_hit_box_area_entered(area:Area2D) -> void:
-		if not area is HurtBox:
-			return;
-		get_hit();
 
 func get_hit() -> void:
 	if is_invincible:

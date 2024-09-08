@@ -23,9 +23,3 @@ func increase_health(heal: float) -> void:
 	else:
 		curr_health += heal;
 
-func _on_damage_entered(area:Area2D) -> void:
-	if not area is HurtBox:
-		return;
-	var hurt_box: HurtBox = area as HurtBox;
-	reduce_health(hurt_box.damage);
-

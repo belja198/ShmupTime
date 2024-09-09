@@ -20,9 +20,13 @@ func move_projectile(delta: float) -> void:
 	position += direction * speed * delta;
 
 func _on_area_entered(area:Area2D) -> void:
-	print("projectile dissapears")
+	#print("projectile dissapears")
 	queue_free();
 
 func _on_damage_collided() -> void:
 	#print("projectile dissapears")
 	queue_free();
+
+# used by enemies
+#func _on_body_entered(body:Node2D) -> void:
+#	queue_free();

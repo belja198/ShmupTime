@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpkp4q0j4xbaj"]
+
+[sub_resource type="Curve2D" id="Curve2D_1xb2u"]
+
+[node name="EnemyPath2D" type="Path2D"]
+curve = SubResource("Curve2D_1xb2u")

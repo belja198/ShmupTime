@@ -8,5 +8,8 @@ func _ready() -> void:
 	enemy_health.health_deplted.connect(death);
 
 
+
+
+
 func death() -> void:
 	queue_free();

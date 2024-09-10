@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4l62bwt8vewv"]
+
+[ext_resource type="Script" path="res://scenes/enemy_path_follow_2d.gd" id="1_q7iss"]
+
+[node name="EnemyPathFollow2D" type="PathFollow2D"]
+rotates = false
+loop = false
+script = ExtResource("1_q7iss")
+enemy_speed = 200.0

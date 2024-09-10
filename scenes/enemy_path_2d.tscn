@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpkp4q0j4xbaj"]
+[gd_scene load_steps=3 format=3 uid="uid://bej55cn0bw533"]
 
-[sub_resource type="Curve2D" id="Curve2D_1xb2u"]
+[ext_resource type="Script" path="res://scenes/enemy_path_2d.gd" id="1_swwue"]
+[ext_resource type="PackedScene" uid="uid://d4l62bwt8vewv" path="res://scenes/enemy_path_follow_2d.tscn" id="2_duva0"]
 
 [node name="EnemyPath2D" type="Path2D"]
-curve = SubResource("Curve2D_1xb2u")
+script = ExtResource("1_swwue")
+enemy_follow_tscn = ExtResource("2_duva0")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

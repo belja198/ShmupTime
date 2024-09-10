@@ -11,6 +11,7 @@ size = Vector2(128, 72)
 
 [node name="EnemyWide" instance=ExtResource("1_wnl4c")]
 script = ExtResource("2_cdtok")
+speed = 350.0
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -16)

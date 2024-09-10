@@ -3,9 +3,10 @@ class_name EnemyPathFollow2D
 
 @export var enemy: EnemyBase;
 
-@export var enemy_speed: float = 50.0;
+func _ready() -> void:
+	enemy.enemy_died.connect(func() -> void: queue_free());
 
 func _process(delta: float) -> void:
-	set_progress(get_progress() + enemy_speed * delta);
+	set_progress(get_progress() + enemy.speed * delta);
 	if get_progress_ratio() == 1:
 		queue_free();

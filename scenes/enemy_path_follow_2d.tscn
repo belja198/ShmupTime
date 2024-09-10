@@ -6,4 +6,3 @@
 rotates = false
 loop = false
 script = ExtResource("1_q7iss")
-enemy_speed = 200.0

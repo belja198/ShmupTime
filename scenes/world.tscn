@@ -25,7 +25,7 @@ normal = Vector2(0, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_uu0ae"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 166, -155, 0, 0, 0, 0, 333, 154, 0, 0, 0, 0, 509, 311, 0, 0, 0, 0, 752, 369, 0, 0, 0, 0, 912, 488, 0, 0, 0, 0, 1015, 478, 0, 0, 0, 0, 1130, 393, 0, 0, 0, 0, 1263, 276)
+"points": PackedVector2Array(0, 0, 0, 0, 199, -80, 0, 0, 0, 0, 333, 154, 0, 0, 0, 0, 509, 311, 0, 0, 0, 0, 752, 369, 0, 0, 0, 0, 912, 488, 0, 0, 0, 0, 1015, 478, 0, 0, 0, 0, 1130, 393, 0, 0, 0, 0, 1263, 276)
 }
 point_count = 8
 
@@ -95,5 +95,13 @@ shape = SubResource("WorldBoundaryShape2D_7036d")
 
 [node name="EnemyPath2D" parent="." instance=ExtResource("3_8emns")]
 curve = SubResource("Curve2D_uu0ae")
-num_of_enemies = 5
+enemies_max = 2
 enemy_tscn = ExtResource("4_ybxaq")
+
+[node name="RegularWave" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="RegularWave"]
+position = Vector2(350, 416)
+
+[node name="Marker2D2" type="Marker2D" parent="RegularWave"]
+position = Vector2(518, 449)

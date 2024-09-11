@@ -8,6 +8,6 @@ script = ExtResource("1_swwue")
 enemy_follow_tscn = ExtResource("2_duva0")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

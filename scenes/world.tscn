@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://kekbk8lpsn2d"]
+[gd_scene load_steps=15 format=3 uid="uid://kekbk8lpsn2d"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_6v4ou"]
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_stewb"]
 [ext_resource type="PackedScene" uid="uid://bej55cn0bw533" path="res://scenes/enemy_path_2d.tscn" id="3_8emns"]
 [ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="4_ybxaq"]
+[ext_resource type="Script" path="res://scenes/TempPositionSpawner.gd" id="5_gd8oj"]
+[ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="5_tu6cf"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_67nfp"]
 
@@ -98,6 +100,7 @@ curve = SubResource("Curve2D_uu0ae")
 enemies_max = 2
 enemy_tscn = ExtResource("4_ybxaq")
 
+<<<<<<< Updated upstream
 [node name="RegularWave" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="RegularWave"]
@@ -105,3 +108,37 @@ position = Vector2(350, 416)
 
 [node name="Marker2D2" type="Marker2D" parent="RegularWave"]
 position = Vector2(518, 449)
+=======
+[node name="PositionSpawner" type="Node2D" parent="."]
+script = ExtResource("5_gd8oj")
+enemy_tscn = ExtResource("5_tu6cf")
+
+[node name="Marker2D" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(192, -256)
+
+[node name="Marker2D2" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(832, -256)
+
+[node name="Marker2D3" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(320, -256)
+
+[node name="Marker2D4" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(704, -256)
+
+[node name="Marker2D5" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(448, -256)
+
+[node name="Marker2D6" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(960, -256)
+
+[node name="Marker2D7" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(576, -256)
+
+[node name="SpawnTimer" type="Timer" parent="PositionSpawner"]
+
+[node name="EnemyKamikaze" parent="." instance=ExtResource("5_tu6cf")]
+position = Vector2(345, 484)
+speed = null
+
+[connection signal="timeout" from="PositionSpawner/SpawnTimer" to="PositionSpawner" method="_on_spawn_timer_timeout"]
+>>>>>>> Stashed changes

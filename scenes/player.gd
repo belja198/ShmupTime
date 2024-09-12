@@ -22,6 +22,9 @@ var is_invincible: bool = false;
 
 const PROJECTILE: PackedScene = preload("res://scenes/projectile_player_first.tscn")
 
+func _ready() -> void:
+	GlobalScript.player = self;
+
 func _physics_process(delta: float) -> void:
 	
 	#var mouse_vector: Vector2 = get_viewport().get_mouse_position();	#speed should be 15
@@ -85,6 +88,13 @@ func get_hit() -> void:
 		modulate.g = 0.0;
 		modulate.b = 0.0;
 	else:
+#	if !is_coyote:
+#		is_coyote = true;
+#		coyote_timer.start();
+#		modulate.r = 1.0;
+#		modulate.g = 0.0;
+#		modulate.b = 0.0;
+#	else:
 		# stop coyote timer
 		coyote_timer.stop();
 		lives = lives - 1;
@@ -96,6 +106,16 @@ func get_hit() -> void:
 		modulate.r = 0.0;
 		modulate.g = 0.0;
 		modulate.b = 1.0;
+#		coyote_timer.stop();
+	lives = lives - 1;
+	if lives == 0:
+		print("DEAD");
+#	is_coyote = false;
+	is_invincible = true;
+	invincible_timer.start();
+	modulate.r = 0.0;
+	modulate.g = 0.0;
+	modulate.b = 1.0;
 
 
 

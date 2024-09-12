@@ -23,6 +23,7 @@ func shoot() -> void:
 	var proj: ProjectileBase = projectile.instantiate();
 	get_tree().get_root().add_child(proj);
 	proj.global_position = global_position;
+	get_tree().get_root().add_child(proj);
 	can_shoot = false;
 	shoot_timer.start();
 

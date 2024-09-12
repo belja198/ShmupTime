@@ -1,8 +1,12 @@
 extends Path2D
 
 @export var spawn_cooldown: float = 1.0;
+<<<<<<< Updated upstream
 @export var enemies_max: int = 1;
 var enemies_spawned: int = 0;
+=======
+@export var num_of_enemies: int = 1;
+>>>>>>> Stashed changes
 
 @export var enemy_tscn: PackedScene;
 @export var enemy_follow_tscn: PackedScene;

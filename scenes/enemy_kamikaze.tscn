@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5j8grq06wxih"]
+
+[ext_resource type="PackedScene" uid="uid://c07ditq2pxsxt" path="res://scenes/enemy_base.tscn" id="1_sf4yg"]
+[ext_resource type="Texture2D" uid="uid://d1b5iruxgy3au" path="res://sprites/ship_196.png" id="2_hhupx"]
+[ext_resource type="Script" path="res://scenes/enemy_kamikaze.gd" id="2_lb6pf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_doydd"]
+size = Vector2(72, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc28f"]
+size = Vector2(72, 48)
+
+[node name="EnemyKamikaze" instance=ExtResource("1_sf4yg")]
+script = ExtResource("2_lb6pf")
+speed = 500.0
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 22)
+texture = ExtResource("2_hhupx")
+
+[node name="HealthBox" parent="." index="1"]
+max_health = 150.0
+
+[node name="CollisionShape2D" parent="HealthBox" index="0"]
+shape = SubResource("RectangleShape2D_doydd")
+
+[node name="CollisionShape2D" parent="DamageBox" index="0"]
+shape = SubResource("RectangleShape2D_oc28f")

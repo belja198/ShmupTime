@@ -1,4 +1,5 @@
 [gd_scene load_steps=7 format=3 uid="uid://cu1qdt3u0crqo"]
+[gd_scene load_steps=8 format=3 uid="uid://cu1qdt3u0crqo"]
 
 [ext_resource type="PackedScene" uid="uid://c07ditq2pxsxt" path="res://scenes/enemy_base.tscn" id="1_wnl4c"]
 [ext_resource type="Script" path="res://scenes/enemy_wide.gd" id="2_cdtok"]
@@ -7,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dvy7na4ysyy8" path="res://scenes/shooter.tscn" id="4_v6b3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o30es"]
+size = Vector2(128, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3d7g"]
 size = Vector2(128, 72)
 
 [node name="EnemyWide" instance=ExtResource("1_wnl4c")]
@@ -31,3 +35,6 @@ projectile = ExtResource("4_i0la4")
 [node name="Shooter2" parent="." index="3" instance=ExtResource("4_v6b3q")]
 position = Vector2(40, 55)
 projectile = ExtResource("4_i0la4")
+
+[node name="CollisionShape2D" parent="DamageBox" index="0"]
+shape = SubResource("RectangleShape2D_d3d7g")

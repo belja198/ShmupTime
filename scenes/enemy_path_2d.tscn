@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bej55cn0bw533"]
+
+[ext_resource type="Script" path="res://scenes/enemy_path_2d.gd" id="1_swwue"]
+[ext_resource type="PackedScene" uid="uid://d4l62bwt8vewv" path="res://scenes/enemy_path_follow_2d.tscn" id="2_duva0"]
+
+[node name="EnemyPath2D" type="Path2D"]
+script = ExtResource("1_swwue")
+num_of_enemies = 3
+enemy_follow_tscn = ExtResource("2_duva0")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

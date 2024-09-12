@@ -1,0 +1,144 @@
+[gd_scene load_steps=15 format=3 uid="uid://kekbk8lpsn2d"]
+
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_6v4ou"]
+[ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_stewb"]
+[ext_resource type="PackedScene" uid="uid://bej55cn0bw533" path="res://scenes/enemy_path_2d.tscn" id="3_8emns"]
+[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="4_ybxaq"]
+[ext_resource type="Script" path="res://scenes/TempPositionSpawner.gd" id="5_gd8oj"]
+[ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="5_tu6cf"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_67nfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmhea"]
+size = Vector2(16, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1smu"]
+size = Vector2(1150, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cpa7"]
+size = Vector2(1155, 20)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3cks8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ii0lh"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7036d"]
+
+[sub_resource type="Curve2D" id="Curve2D_uu0ae"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 199, -80, 0, 0, 0, 0, 333, 154, 0, 0, 0, 0, 509, 311, 0, 0, 0, 0, 752, 369, 0, 0, 0, 0, 912, 488, 0, 0, 0, 0, 1015, 478, 0, 0, 0, 0, 1130, 393, 0, 0, 0, 0, 1263, 276)
+}
+point_count = 8
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_6v4ou")
+
+[node name="Player" parent="." instance=ExtResource("1_stewb")]
+position = Vector2(576, 872)
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.0509804, 0, 0.145098, 1)
+z_index = -10
+position = Vector2(501, 480)
+scale = Vector2(1500, 2096)
+texture = SubResource("CanvasTexture_67nfp")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(56, 540)
+shape = SubResource("RectangleShape2D_fmhea")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2(1096, 540)
+shape = SubResource("RectangleShape2D_fmhea")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+position = Vector2(576, -10)
+shape = SubResource("RectangleShape2D_v1smu")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
+position = Vector2(576, 1090)
+shape = SubResource("RectangleShape2D_1cpa7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.194349, 0.194349, 0.194349, 1)
+z_index = 10
+position = Vector2(-336, 468)
+scale = Vector2(800, 1960)
+texture = SubResource("CanvasTexture_3cks8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.196078, 0.196078, 0.196078, 1)
+z_index = 10
+position = Vector2(1488, 484)
+scale = Vector2(800, 1928)
+texture = SubResource("CanvasTexture_3cks8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(594, 540)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 1120.0
+offset_top = 6.0
+offset_right = 1296.0
+offset_bottom = 654.0
+
+[node name="WallsForProjectiles" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForProjectiles"]
+position = Vector2(587, -114)
+shape = SubResource("WorldBoundaryShape2D_ii0lh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WallsForProjectiles"]
+position = Vector2(592, 1255)
+shape = SubResource("WorldBoundaryShape2D_7036d")
+
+[node name="EnemyPath2D" parent="." instance=ExtResource("3_8emns")]
+curve = SubResource("Curve2D_uu0ae")
+enemies_max = 2
+enemy_tscn = ExtResource("4_ybxaq")
+
+<<<<<<< Updated upstream
+[node name="RegularWave" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="RegularWave"]
+position = Vector2(350, 416)
+
+[node name="Marker2D2" type="Marker2D" parent="RegularWave"]
+position = Vector2(518, 449)
+=======
+[node name="PositionSpawner" type="Node2D" parent="."]
+script = ExtResource("5_gd8oj")
+enemy_tscn = ExtResource("5_tu6cf")
+
+[node name="Marker2D" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(192, -256)
+
+[node name="Marker2D2" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(832, -256)
+
+[node name="Marker2D3" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(320, -256)
+
+[node name="Marker2D4" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(704, -256)
+
+[node name="Marker2D5" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(448, -256)
+
+[node name="Marker2D6" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(960, -256)
+
+[node name="Marker2D7" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(576, -256)
+
+[node name="SpawnTimer" type="Timer" parent="PositionSpawner"]
+
+[node name="EnemyKamikaze" parent="." instance=ExtResource("5_tu6cf")]
+position = Vector2(345, 484)
+speed = null
+
+[connection signal="timeout" from="PositionSpawner/SpawnTimer" to="PositionSpawner" method="_on_spawn_timer_timeout"]
+>>>>>>> Stashed changes

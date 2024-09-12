@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://cx56mxno1jwww"]
+
+[ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_bwh2l"]
+[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="2_2mihv"]
+[ext_resource type="PackedScene" uid="uid://bej55cn0bw533" path="res://scenes/enemy_path_2d.tscn" id="3_ctdbp"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8rf5d"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_55tbh"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fnfl6"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xy36l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvrfh"]
+size = Vector2(20, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pqql"]
+size = Vector2(740, 20)
+
+[sub_resource type="Curve2D" id="Curve2D_wvpyh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 759, -107, 0, 0, 0, 0, 743, 167, 0, 0, 0, 0, 1125, 309, 0, 0, 0, 0, 1205, 505, 0, 0, 0, 0, 833, 595, 0, 0, 0, 0, 833, 595, 0, 0, 0, 0, 501, 581)
+}
+point_count = 7
+
+[node name="World" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.141176, 0.00392157, 0.156863, 1)
+z_index = -20
+position = Vector2(960, 540)
+scale = Vector2(1920, 1080)
+texture = SubResource("CanvasTexture_8rf5d")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.152941, 0.152941, 0.152941, 1)
+z_index = 10
+position = Vector2(105, 540)
+scale = Vector2(1010, 1080)
+texture = SubResource("CanvasTexture_55tbh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.152941, 0.152941, 0.152941, 1)
+z_index = 10
+position = Vector2(1980, 540)
+scale = Vector2(1340, 1080)
+texture = SubResource("CanvasTexture_55tbh")
+
+[node name="Player" parent="." instance=ExtResource("1_bwh2l")]
+position = Vector2(961, 927)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(954, -236)
+shape = SubResource("WorldBoundaryShape2D_fnfl6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(949, 1260)
+shape = SubResource("WorldBoundaryShape2D_xy36l")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+z_index = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(600, 540)
+shape = SubResource("RectangleShape2D_pvrfh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1320, 540)
+shape = SubResource("RectangleShape2D_pvrfh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, -10)
+shape = SubResource("RectangleShape2D_6pqql")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, 1090)
+shape = SubResource("RectangleShape2D_6pqql")
+
+[node name="EnemyPath2D" parent="." instance=ExtResource("3_ctdbp")]
+curve = SubResource("Curve2D_wvpyh")
+enemy_tscn = ExtResource("2_2mihv")

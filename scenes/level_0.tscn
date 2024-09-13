@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx56mxno1jwww"]
+[gd_scene load_steps=10 format=3 uid="uid://cx56mxno1jwww"]
 
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_bwh2l"]
-[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="2_2mihv"]
-[ext_resource type="PackedScene" uid="uid://bej55cn0bw533" path="res://scenes/enemy_path_2d.tscn" id="3_ctdbp"]
+[ext_resource type="Script" path="res://scenes/TempPositionSpawner.gd" id="2_uu2jk"]
+[ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="3_h05hw"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_8rf5d"]
 
@@ -18,12 +18,6 @@ size = Vector2(20, 1080)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pqql"]
 size = Vector2(740, 20)
-
-[sub_resource type="Curve2D" id="Curve2D_wvpyh"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 759, -107, 0, 0, 0, 0, 743, 167, 0, 0, 0, 0, 1125, 309, 0, 0, 0, 0, 1205, 505, 0, 0, 0, 0, 833, 595, 0, 0, 0, 0, 833, 595, 0, 0, 0, 0, 501, 581)
-}
-point_count = 7
 
 [node name="World" type="Node2D"]
 
@@ -58,7 +52,7 @@ position = Vector2(961, 927)
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(954, -236)
+position = Vector2(960, -24)
 shape = SubResource("WorldBoundaryShape2D_fnfl6")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
@@ -84,6 +78,20 @@ shape = SubResource("RectangleShape2D_6pqql")
 position = Vector2(960, 1090)
 shape = SubResource("RectangleShape2D_6pqql")
 
-[node name="EnemyPath2D" parent="." instance=ExtResource("3_ctdbp")]
-curve = SubResource("Curve2D_wvpyh")
-enemy_tscn = ExtResource("2_2mihv")
+[node name="PositionSpawner" type="Node2D" parent="."]
+script = ExtResource("2_uu2jk")
+cooldown = 4.0
+enemy_tscn = ExtResource("3_h05hw")
+
+[node name="Marker2D" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(704, -128)
+
+[node name="Marker2D2" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(960, -128)
+
+[node name="Marker2D3" type="Marker2D" parent="PositionSpawner"]
+position = Vector2(1216, -128)
+
+[node name="SpawnTimer" type="Timer" parent="PositionSpawner"]
+
+[connection signal="timeout" from="PositionSpawner/SpawnTimer" to="PositionSpawner" method="_on_spawn_timer_timeout"]

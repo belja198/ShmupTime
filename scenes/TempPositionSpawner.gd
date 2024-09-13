@@ -5,18 +5,18 @@ extends Node2D
 var marker_nodes: Array[Marker2D];
 var waves: int = 1;
 
+
+@onready var spawn_timer: Timer = $SpawnTimer;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for child in get_children():
 		if child is Marker2D:
 			marker_nodes.append(child)
 
-
-func _process(delta: float) -> void:
-	if waves != 0:
-		#spawn();
-		waves -= 1;
-
+	
+	spawn_timer.wait_time = cooldown;
+	spawn_timer.start();
 
 func spawn() -> void:
 	for marker in marker_nodes:
@@ -25,4 +25,4 @@ func spawn() -> void:
 		get_tree().get_root().add_child(enemy);
 
 func _on_spawn_timer_timeout() -> void:
-	pass;
+	spawn();

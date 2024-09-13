@@ -81,13 +81,7 @@ func get_hit() -> void:
 	if is_invincible:
 		return;
 
-	if !is_coyote:
-		is_coyote = true;
-		coyote_timer.start();
-		modulate.r = 1.0;
-		modulate.g = 0.0;
-		modulate.b = 0.0;
-	else:
+	
 #	if !is_coyote:
 #		is_coyote = true;
 #		coyote_timer.start();
@@ -96,17 +90,6 @@ func get_hit() -> void:
 #		modulate.b = 0.0;
 #	else:
 		# stop coyote timer
-		coyote_timer.stop();
-		lives = lives - 1;
-		if lives == 0:
-			print("DEAD");
-		is_coyote = false;
-		is_invincible = true;
-		invincible_timer.start();
-		modulate.r = 0.0;
-		modulate.g = 0.0;
-		modulate.b = 1.0;
-#		coyote_timer.stop();
 	lives = lives - 1;
 	if lives == 0:
 		print("DEAD");

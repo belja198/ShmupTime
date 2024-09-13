@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cx56mxno1jwww"]
+[gd_scene load_steps=11 format=3 uid="uid://cx56mxno1jwww"]
 
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_bwh2l"]
 [ext_resource type="Script" path="res://scenes/TempPositionSpawner.gd" id="2_uu2jk"]
 [ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="3_h05hw"]
+[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="4_orp2f"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_8rf5d"]
 
@@ -49,14 +50,14 @@ texture = SubResource("CanvasTexture_55tbh")
 [node name="Player" parent="." instance=ExtResource("1_bwh2l")]
 position = Vector2(961, 927)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="WallsForProjectiles" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForProjectiles"]
 position = Vector2(960, -24)
 shape = SubResource("WorldBoundaryShape2D_fnfl6")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(949, 1260)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WallsForProjectiles"]
+position = Vector2(960, 1112)
 shape = SubResource("WorldBoundaryShape2D_xy36l")
 
 [node name="Walls" type="StaticBody2D" parent="."]
@@ -84,14 +85,17 @@ cooldown = 4.0
 enemy_tscn = ExtResource("3_h05hw")
 
 [node name="Marker2D" type="Marker2D" parent="PositionSpawner"]
-position = Vector2(704, -128)
+position = Vector2(704, -32)
 
 [node name="Marker2D2" type="Marker2D" parent="PositionSpawner"]
-position = Vector2(960, -128)
+position = Vector2(960, -32)
 
 [node name="Marker2D3" type="Marker2D" parent="PositionSpawner"]
-position = Vector2(1216, -128)
+position = Vector2(1216, -32)
 
 [node name="SpawnTimer" type="Timer" parent="PositionSpawner"]
+
+[node name="EnemyWide" parent="." instance=ExtResource("4_orp2f")]
+position = Vector2(904, 584)
 
 [connection signal="timeout" from="PositionSpawner/SpawnTimer" to="PositionSpawner" method="_on_spawn_timer_timeout"]

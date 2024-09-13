@@ -68,8 +68,6 @@ shoot={
 2d_physics/layer_2="PLAYER"
 2d_physics/layer_3="ENEMIES"
 2d_physics/layer_4="HEALTHBOX"
-2d_physics/layer_5="PLAYER_HURTBOX"
-2d_physics/layer_6="ENEMY_HURTBOX"
 
 [rendering]
 

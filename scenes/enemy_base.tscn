@@ -16,3 +16,8 @@ script = ExtResource("1_6y15b")
 [node name="DamageBox" parent="." instance=ExtResource("3_8fwty")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
+
+[node name="BoundaryDetector" type="Area2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundaryDetector"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://y1uuaw5url65"]
+
+[ext_resource type="PackedScene" uid="uid://cnghu310i33yw" path="res://scenes/projectile_base.tscn" id="1_acnjh"]
+[ext_resource type="Texture2D" uid="uid://2020ogykrmyj" path="res://sprites/laserRed08.png" id="2_feqxh"]
+[ext_resource type="Script" path="res://scenes/projectile_enemy_sine.gd" id="2_m7b3b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gsvl"]
+radius = 12.0
+
+[node name="ProjectileEnemySine" instance=ExtResource("1_acnjh")]
+script = ExtResource("2_m7b3b")
+amplitude = 10.0
+frequency = 1.0
+speed = 200.0
+
+[node name="CollisionShape2D" parent="DamageBox" index="0"]
+shape = SubResource("CircleShape2D_4gsvl")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_feqxh")

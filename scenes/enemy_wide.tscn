@@ -21,7 +21,6 @@ texture = ExtResource("3_3df3v")
 flip_v = true
 
 [node name="HealthBox" parent="." index="1"]
-collision_layer = 8
 max_health = 800.0
 
 [node name="CollisionShape2D" parent="HealthBox" index="0"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://clt81lqiieag0"]
+
+[ext_resource type="PackedScene" uid="uid://dvy7na4ysyy8" path="res://scenes/shooter.tscn" id="1_ymmit"]
+[ext_resource type="PackedScene" uid="uid://y1uuaw5url65" path="res://scenes/projectile_enemy_sine.tscn" id="2_3dbiw"]
+
+[node name="Test" type="Node2D"]
+
+[node name="Shooter" parent="." instance=ExtResource("1_ymmit")]
+position = Vector2(490, 60)
+projectile = ExtResource("2_3dbiw")
+shoot_cooldown = 3.0

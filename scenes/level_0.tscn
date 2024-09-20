@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx56mxno1jwww"]
+[gd_scene load_steps=13 format=3 uid="uid://cx56mxno1jwww"]
 
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_bwh2l"]
-[ext_resource type="Script" path="res://scenes/TempPositionSpawner.gd" id="2_uu2jk"]
 [ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="3_h05hw"]
-[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="4_orp2f"]
+[ext_resource type="PackedScene" uid="uid://cu750blra1ooo" path="res://scenes/spawner_position.tscn" id="4_awn2e"]
+[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="5_7pdny"]
+[ext_resource type="PackedScene" uid="uid://cvicvnkg0tpif" path="res://scenes/spawner_path.tscn" id="5_ltb2u"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_8rf5d"]
 
@@ -11,8 +12,10 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fnfl6"]
 normal = Vector2(0, 1)
+distance = -104.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xy36l"]
+distance = -104.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvrfh"]
 size = Vector2(20, 1080)
@@ -20,10 +23,16 @@ size = Vector2(20, 1080)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pqql"]
 size = Vector2(740, 20)
 
+[sub_resource type="Curve2D" id="Curve2D_5mrov"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1000, -64, 0, 0, 0, 0, 1160, 80, 0, 0, 0, 0, 1232, 224, 0, 0, 0, 0, 1184, 336, 0, 0, 0, 0, 1056, 384, 0, 0, 0, 0, 848, 416, 0, 0, 0, 0, 712, 456, 0, 0, 0, 0, 552, 488)
+}
+point_count = 8
+
 [node name="World" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(960, 384)
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.141176, 0.00392157, 0.156863, 1)
@@ -79,23 +88,26 @@ shape = SubResource("RectangleShape2D_6pqql")
 position = Vector2(960, 1090)
 shape = SubResource("RectangleShape2D_6pqql")
 
-[node name="PositionSpawner" type="Node2D" parent="."]
-script = ExtResource("2_uu2jk")
-cooldown = 4.0
+[node name="SpawnerPath" parent="." instance=ExtResource("5_ltb2u")]
+enemies_to_spawn = 5
+enemy_tscn = ExtResource("5_7pdny")
+spawn_cooldown = 2.0
+spawn_start_time = 3.0
+
+[node name="Path2D" type="Path2D" parent="SpawnerPath"]
+curve = SubResource("Curve2D_5mrov")
+
+[node name="SpawnerPosition" parent="." instance=ExtResource("4_awn2e")]
 enemy_tscn = ExtResource("3_h05hw")
 
-[node name="Marker2D" type="Marker2D" parent="PositionSpawner"]
-position = Vector2(704, -32)
+[node name="Marker2D" type="Marker2D" parent="SpawnerPosition"]
+position = Vector2(704, -24)
 
-[node name="Marker2D2" type="Marker2D" parent="PositionSpawner"]
-position = Vector2(960, -32)
+[node name="Marker2D2" type="Marker2D" parent="SpawnerPosition"]
+position = Vector2(1152, -24)
 
-[node name="Marker2D3" type="Marker2D" parent="PositionSpawner"]
-position = Vector2(1216, -32)
+[node name="Marker2D3" type="Marker2D" parent="SpawnerPosition"]
+position = Vector2(1216, -24)
 
-[node name="SpawnTimer" type="Timer" parent="PositionSpawner"]
-
-[node name="EnemyWide" parent="." instance=ExtResource("4_orp2f")]
-position = Vector2(904, 584)
-
-[connection signal="timeout" from="PositionSpawner/SpawnTimer" to="PositionSpawner" method="_on_spawn_timer_timeout"]
+[node name="Marker2D4" type="Marker2D" parent="SpawnerPosition"]
+position = Vector2(768, -24)

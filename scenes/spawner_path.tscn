@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvicvnkg0tpif"]
+
+[ext_resource type="PackedScene" uid="uid://b4u8ak8vfkfqk" path="res://scenes/spawner_base.tscn" id="1_tn1ra"]
+[ext_resource type="Script" path="res://scenes/spawner_path.gd" id="2_vw1uw"]
+[ext_resource type="PackedScene" uid="uid://d4l62bwt8vewv" path="res://scenes/enemy_path_follow_2d.tscn" id="3_r5p24"]
+
+[node name="SpawnerPath" instance=ExtResource("1_tn1ra")]
+script = ExtResource("2_vw1uw")
+enemy_follow_tscn = ExtResource("3_r5p24")

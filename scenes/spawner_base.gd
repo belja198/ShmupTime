@@ -1,6 +1,7 @@
 extends Node2D
+class_name SpawnerBase
 
-@export var enemies_to_spawn: int = 1.0;
+@export var enemies_to_spawn: int = 1;
 
 @export var enemy_tscn: PackedScene;
 @export var spawn_cooldown: float = 1.0;
@@ -18,6 +19,7 @@ func spawn() -> void:
 	pass;
 
 func _on_spawn_timer_timeout() -> void:
+	#print("spawner timeout")
 	if enemies_to_spawn <= 0:
 		return;
 		

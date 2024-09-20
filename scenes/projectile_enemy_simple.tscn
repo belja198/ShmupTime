@@ -1,25 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://wyssqmiyv4rg"]
+[gd_scene load_steps=5 format=3 uid="uid://wyssqmiyv4rg"]
 
 [ext_resource type="PackedScene" uid="uid://cnghu310i33yw" path="res://scenes/projectile_base.tscn" id="1_2bhxe"]
 [ext_resource type="Texture2D" uid="uid://cxgdl2lqu0hup" path="res://sprites/laserRed12.png" id="2_u2hd8"]
 [ext_resource type="Script" path="res://scenes/projectile_enemy_simple.gd" id="2_y10ri"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4sxt"]
-size = Vector2(6, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4isg"]
 size = Vector2(6, 28)
 
 [node name="ProjectileEnemySimple" instance=ExtResource("1_2bhxe")]
 script = ExtResource("2_y10ri")
-direction = Vector2(0, 1)
-
-[node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource("RectangleShape2D_y4sxt")
 
 [node name="CollisionShape2D" parent="DamageBox" index="0"]
 shape = SubResource("RectangleShape2D_j4isg")
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_u2hd8")

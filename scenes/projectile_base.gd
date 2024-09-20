@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 class_name ProjectileBase
 
 @export var speed: float = 400.0;
@@ -12,19 +12,14 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	move_projectile(delta);
 
 
 func move_projectile(delta: float) -> void:
-	position += direction * speed * delta;
-
-func _on_area_entered(area:Area2D) -> void:
-	#print("projectile dissapears")
-	queue_free();
+	position += direction.normalized() * speed * delta;
 
 func _on_damage_collided() -> void:
-	#print("projectile dissapears")
 	queue_free();
 
 # used by enemies

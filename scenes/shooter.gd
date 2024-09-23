@@ -18,6 +18,5 @@ func shoot() -> void:
 	get_tree().get_root().add_child(proj);
 	shoot_timer.start();
 
-
 func _on_timer_timeout() -> void:
 	shoot();

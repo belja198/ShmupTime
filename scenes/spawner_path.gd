@@ -1,14 +1,11 @@
 extends SpawnerBase
 
 @onready var path: Path2D = $Path2D;
-
 @export var enemy_follow_tscn: PackedScene;
-
 
 func _ready() -> void:
 	super._ready();
 	if path == null:
-		print("WARNING: SpawnerPath needs to have Path2D as a child");
 		return;
 
 func spawn() -> void:

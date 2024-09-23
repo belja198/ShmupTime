@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/enemy_wide.gd" id="2_slhgw"]
 [ext_resource type="Texture2D" uid="uid://b8epdr7gi8ww0" path="res://sprites/ship_50.png" id="3_3df3v"]
 [ext_resource type="PackedScene" uid="uid://dvy7na4ysyy8" path="res://scenes/shooter.tscn" id="4_xkyvf"]
-[ext_resource type="PackedScene" uid="uid://wyssqmiyv4rg" path="res://scenes/projectile_enemy_simple.tscn" id="5_ccg5a"]
+[ext_resource type="PackedScene" uid="uid://y1uuaw5url65" path="res://scenes/projectile_enemy_sine.tscn" id="5_jo5fd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txiop"]
 size = Vector2(128, 72)
@@ -33,4 +33,4 @@ shape = SubResource("RectangleShape2D_yrxof")
 
 [node name="Shooter" parent="." index="3" instance=ExtResource("4_xkyvf")]
 position = Vector2(0, 70)
-projectile = ExtResource("5_ccg5a")
+projectile_tscn = ExtResource("5_jo5fd")

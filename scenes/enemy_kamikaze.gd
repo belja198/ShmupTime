@@ -10,7 +10,5 @@ func _ready() -> void:
 	var target: Vector2 = GlobalScript.player.position;
 	target_direction = (target - position).normalized();
 
-
-
 func _physics_process(delta: float) -> void:
 	position += target_direction * speed * delta;

@@ -26,21 +26,11 @@ position = Vector2(-16, -44)
 [node name="FirePoint2" type="Node2D" parent="."]
 position = Vector2(16, -44)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -77.0
-offset_top = 25.0
-offset_right = 77.0
-offset_bottom = 65.0
-
-[node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="InvincibleTimer" type="Timer" parent="."]
 wait_time = 2.0
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.05
 
-[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

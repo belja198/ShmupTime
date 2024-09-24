@@ -16,6 +16,7 @@ var can_shoot: bool = true;
 var is_invincible: bool = false;
 
 signal player_death;
+signal player_lost_life;
 
 const PROJECTILE: PackedScene = preload("res://scenes/projectile_player_first.tscn")
 
@@ -67,6 +68,7 @@ func get_hit() -> void:
 	if is_invincible:
 		return;
 	lives = lives - 1;
+	player_lost_life.emit();
 	if lives == 0:
 		player_death.emit();
 	is_invincible = true;

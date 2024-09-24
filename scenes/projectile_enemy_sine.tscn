@@ -11,7 +11,7 @@ radius = 12.0
 script = ExtResource("2_m7b3b")
 amplitude = 10.0
 frequency = 1.0
-speed = 200.0
+speed = 300.0
 
 [node name="CollisionShape2D" parent="DamageBox" index="0"]
 shape = SubResource("CircleShape2D_4gsvl")

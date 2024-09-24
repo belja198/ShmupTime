@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/projectile_base.gd" id="1_5t4jn"]
 [ext_resource type="PackedScene" uid="uid://mc7kp845xqrd" path="res://scenes/damage_box.tscn" id="2_0vb24"]
 
-[node name="ProjectileBase" type="Node2D"]
+[node name="ProjectileBase" type="Node2D" groups=["projectiles"]]
 script = ExtResource("1_5t4jn")
 direction = Vector2(0, 1)
 

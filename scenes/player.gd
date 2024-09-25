@@ -31,14 +31,11 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("move_right"):
 		direction_x += 1;
-
 	if Input.is_action_pressed("move_left"):
 		direction_x -= 1;
-
 	
 	if Input.is_action_pressed("move_down"):
 		direction_y += 1;
-
 	if Input.is_action_pressed("move_up"):
 		direction_y -= 1;
 

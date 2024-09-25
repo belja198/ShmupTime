@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnqv0l3tcoda0"]
+[gd_scene load_steps=15 format=3 uid="uid://bnqv0l3tcoda0"]
 
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_5grsf"]
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_6ikq8"]
 [ext_resource type="PackedScene" uid="uid://cvicvnkg0tpif" path="res://scenes/spawner_path.tscn" id="2_mx1gn"]
-[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="3_rrla5"]
 [ext_resource type="PackedScene" uid="uid://cu750blra1ooo" path="res://scenes/spawner_position.tscn" id="4_kc6no"]
+[ext_resource type="PackedScene" uid="uid://bovdggq1gkfhj" path="res://scenes/enemy_regular.tscn" id="4_u8se2"]
 [ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="5_10f45"]
+[ext_resource type="FontFile" uid="uid://d4mhlv8627kk" path="res://PublicPixel10.ttf" id="7_ih2f1"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_8rf5d"]
 
@@ -12,7 +14,7 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fnfl6"]
 normal = Vector2(0, 1)
-distance = -128.0
+distance = -104.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xy36l"]
 distance = -168.0
@@ -25,11 +27,12 @@ size = Vector2(740, 20)
 
 [sub_resource type="Curve2D" id="Curve2D_5mrov"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1000, -64, 0, 0, 0, 0, 1160, 80, 0, 0, 0, 0, 1232, 224, 0, 0, 0, 0, 1184, 336, 0, 0, 0, 0, 1056, 384, 0, 0, 0, 0, 848, 416, 0, 0, 0, 0, 712, 456, 0, 0, 0, 0, 552, 488)
+"points": PackedVector2Array(0, 0, 0, 0, 984, -56, 0, 0, 0, 0, 1160, 80, 0, 0, 0, 0, 1232, 224, 0, 0, 0, 0, 1184, 336, 0, 0, 0, 0, 1056, 384, 0, 0, 0, 0, 848, 416, 0, 0, 0, 0, 712, 456, 0, 0, 0, 0, 552, 488)
 }
 point_count = 8
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_6ikq8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -42,14 +45,14 @@ scale = Vector2(1920, 1080)
 texture = SubResource("CanvasTexture_8rf5d")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="LeftForeground" type="Sprite2D" parent="."]
 modulate = Color(0.152941, 0.152941, 0.152941, 1)
 z_index = 10
 position = Vector2(105, 540)
 scale = Vector2(1010, 1080)
 texture = SubResource("CanvasTexture_55tbh")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="RightForeground" type="Sprite2D" parent="."]
 modulate = Color(0.152941, 0.152941, 0.152941, 1)
 z_index = 10
 position = Vector2(1980, 540)
@@ -62,7 +65,7 @@ position = Vector2(961, 927)
 [node name="WallsForProjectiles" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForProjectiles"]
-position = Vector2(960, -24)
+position = Vector2(960, 40)
 shape = SubResource("WorldBoundaryShape2D_fnfl6")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WallsForProjectiles"]
@@ -88,11 +91,15 @@ shape = SubResource("RectangleShape2D_6pqql")
 position = Vector2(960, 1090)
 shape = SubResource("RectangleShape2D_6pqql")
 
+[node name="EndTimer" type="Timer" parent="."]
+wait_time = 22.0
+autostart = true
+
 [node name="Waves" type="Node2D" parent="."]
 
 [node name="SpawnerPath" parent="Waves" instance=ExtResource("2_mx1gn")]
 enemies_to_spawn = 5
-enemy_tscn = ExtResource("3_rrla5")
+enemy_tscn = ExtResource("4_u8se2")
 spawn_cooldown = 2.0
 spawn_start_time = 3.0
 
@@ -113,3 +120,59 @@ position = Vector2(1216, -24)
 
 [node name="Marker2D4" type="Marker2D" parent="Waves/SpawnerPosition"]
 position = Vector2(768, -24)
+
+[node name="SpawnerPosition2" parent="Waves" instance=ExtResource("4_kc6no")]
+enemy_tscn = ExtResource("5_10f45")
+spawn_cooldown = 0.5
+spawn_start_time = 8.0
+
+[node name="Marker2D" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(512, 296)
+
+[node name="Marker2D2" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(1344, 256)
+
+[node name="Marker2D3" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(1344, 296)
+
+[node name="Marker2D4" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(512, 256)
+
+[node name="SpawnerPosition3" parent="Waves" instance=ExtResource("4_kc6no")]
+enemy_tscn = ExtResource("5_10f45")
+spawn_cooldown = 0.5
+spawn_start_time = 12.0
+
+[node name="Marker2D" type="Marker2D" parent="Waves/SpawnerPosition3"]
+position = Vector2(554, 106)
+
+[node name="Marker2D2" type="Marker2D" parent="Waves/SpawnerPosition3"]
+position = Vector2(1362, 66)
+
+[node name="Marker2D3" type="Marker2D" parent="Waves/SpawnerPosition3"]
+position = Vector2(1362, 106)
+
+[node name="Marker2D4" type="Marker2D" parent="Waves/SpawnerPosition3"]
+position = Vector2(554, 66)
+
+[node name="LivesTextLabel" type="RichTextLabel" parent="."]
+modulate = Color(0, 0.890196, 0, 1)
+offset_left = 624.0
+offset_top = 984.0
+offset_right = 712.0
+offset_bottom = 1064.0
+theme_override_fonts/normal_font = ExtResource("7_ih2f1")
+theme_override_font_sizes/normal_font_size = 32
+
+[node name="LevelTitleLabel" type="RichTextLabel" parent="."]
+modulate = Color(0, 0.890196, 0, 1)
+offset_left = 672.0
+offset_top = 64.0
+offset_right = 1216.0
+offset_bottom = 128.0
+theme_override_fonts/normal_font = ExtResource("7_ih2f1")
+theme_override_font_sizes/normal_font_size = 32
+text = "Level 1
+"
+
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]

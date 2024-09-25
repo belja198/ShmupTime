@@ -1,11 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cx56mxno1jwww"]
+[gd_scene load_steps=17 format=3 uid="uid://ioniv52qb0ur"]
 
-[ext_resource type="Script" path="res://scenes/level.gd" id="1_0lw8h"]
-[ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_bwh2l"]
-[ext_resource type="PackedScene" uid="uid://bnqv0l3tcoda0" path="res://scenes/level_1.tscn" id="2_jrpgl"]
-[ext_resource type="PackedScene" uid="uid://bovdggq1gkfhj" path="res://scenes/enemy_regular.tscn" id="5_i87m7"]
-[ext_resource type="PackedScene" uid="uid://cvicvnkg0tpif" path="res://scenes/spawner_path.tscn" id="5_ltb2u"]
-[ext_resource type="FontFile" uid="uid://d4mhlv8627kk" path="res://PublicPixel10.ttf" id="7_al7kf"]
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_20ijq"]
+[ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="2_cvjh2"]
+[ext_resource type="PackedScene" uid="uid://cvicvnkg0tpif" path="res://scenes/spawner_path.tscn" id="3_li43w"]
+[ext_resource type="PackedScene" uid="uid://bovdggq1gkfhj" path="res://scenes/enemy_regular.tscn" id="4_c5h14"]
+[ext_resource type="PackedScene" uid="uid://cu750blra1ooo" path="res://scenes/spawner_position.tscn" id="5_tlmps"]
+[ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="6_rhyg5"]
+[ext_resource type="PackedScene" uid="uid://cu1qdt3u0crqo" path="res://scenes/enemy_wide.tscn" id="7_88utd"]
+[ext_resource type="FontFile" uid="uid://d4mhlv8627kk" path="res://PublicPixel10.ttf" id="7_vrb5f"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_8rf5d"]
 
@@ -30,15 +32,14 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="Curve2D" id="Curve2D_8xvyx"]
+[sub_resource type="Curve2D" id="Curve2D_2nd3d"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 648, -80, 0, 0, 0, 0, 672, 248, 0, 0, 0, 0, 888, 288, 0, 0, 0, 0, 1080, 296, 0, 0, 0, 0, 1168, 424, 0, 0, 0, 0, 1088, 576, 0, 0, 0, 0, 840, 696, 0, 0, 0, 0, 712, 744, 0, 0, 0, 0, 544, 816)
+"points": PackedVector2Array(0, 0, 0, 0, 656, -104, 0, 0, 0, 0, 664, 136, 0, 0, 0, 0, 1240, 144, 0, 0, 0, 0, 1264, 448, 0, 0, 0, 0, 696, 424, 0, 0, 0, 0, 704, 728, 0, 0, 0, 0, 432, 728)
 }
-point_count = 9
+point_count = 7
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_0lw8h")
-next_level_tscn = ExtResource("2_jrpgl")
+script = ExtResource("1_20ijq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -65,13 +66,13 @@ position = Vector2(1980, 540)
 scale = Vector2(1340, 1080)
 texture = SubResource("CanvasTexture_55tbh")
 
-[node name="Player" parent="." instance=ExtResource("1_bwh2l")]
+[node name="Player" parent="." instance=ExtResource("2_cvjh2")]
 position = Vector2(961, 927)
 
 [node name="WallsForProjectiles" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForProjectiles"]
-position = Vector2(960, -24)
+position = Vector2(960, 40)
 shape = SubResource("WorldBoundaryShape2D_fnfl6")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WallsForProjectiles"]
@@ -98,27 +99,61 @@ position = Vector2(960, 1090)
 shape = SubResource("RectangleShape2D_6pqql")
 
 [node name="EndTimer" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 24.0
 autostart = true
 
 [node name="Waves" type="Node2D" parent="."]
 
-[node name="SpawnerPath" parent="Waves" instance=ExtResource("5_ltb2u")]
-enemies_to_spawn = 5
-enemy_tscn = ExtResource("5_i87m7")
+[node name="SpawnerPath" parent="Waves" instance=ExtResource("3_li43w")]
+enemies_to_spawn = 4
+enemy_tscn = ExtResource("4_c5h14")
 spawn_cooldown = 2.0
-spawn_start_time = 2.0
+spawn_start_time = 3.0
 
 [node name="Path2D" type="Path2D" parent="Waves/SpawnerPath"]
 curve = SubResource("Curve2D_5mrov")
 
-[node name="SpawnerPath2" parent="Waves" instance=ExtResource("5_ltb2u")]
+[node name="SpawnerPosition" parent="Waves" instance=ExtResource("5_tlmps")]
+enemy_tscn = ExtResource("6_rhyg5")
+spawn_start_time = 0.0
+
+[node name="Marker2D" type="Marker2D" parent="Waves/SpawnerPosition"]
+position = Vector2(704, -24)
+
+[node name="Marker2D2" type="Marker2D" parent="Waves/SpawnerPosition"]
+position = Vector2(1152, -24)
+
+[node name="Marker2D3" type="Marker2D" parent="Waves/SpawnerPosition"]
+position = Vector2(1216, -24)
+
+[node name="Marker2D4" type="Marker2D" parent="Waves/SpawnerPosition"]
+position = Vector2(768, -24)
+
+[node name="SpawnerPosition2" parent="Waves" instance=ExtResource("5_tlmps")]
+enemy_tscn = ExtResource("6_rhyg5")
+spawn_cooldown = 0.5
+spawn_start_time = 6.0
+
+[node name="Marker2D" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(512, 296)
+
+[node name="Marker2D2" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(1344, 256)
+
+[node name="Marker2D3" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(1344, 296)
+
+[node name="Marker2D4" type="Marker2D" parent="Waves/SpawnerPosition2"]
+position = Vector2(512, 256)
+
+[node name="SpawnerPath2" parent="Waves" instance=ExtResource("3_li43w")]
 enemies_to_spawn = 6
-enemy_tscn = ExtResource("5_i87m7")
-spawn_start_time = 10.0
+enemy_tscn = ExtResource("7_88utd")
+spawn_cooldown = 3.0
+spawn_start_time = 4.0
 
 [node name="Path2D" type="Path2D" parent="Waves/SpawnerPath2"]
-curve = SubResource("Curve2D_8xvyx")
+curve = SubResource("Curve2D_2nd3d")
 
 [node name="LivesTextLabel" type="RichTextLabel" parent="."]
 modulate = Color(0, 0.890196, 0, 1)
@@ -126,7 +161,7 @@ offset_left = 624.0
 offset_top = 984.0
 offset_right = 712.0
 offset_bottom = 1064.0
-theme_override_fonts/normal_font = ExtResource("7_al7kf")
+theme_override_fonts/normal_font = ExtResource("7_vrb5f")
 theme_override_font_sizes/normal_font_size = 32
 
 [node name="LevelTitleLabel" type="RichTextLabel" parent="."]
@@ -135,8 +170,10 @@ offset_left = 672.0
 offset_top = 64.0
 offset_right = 1216.0
 offset_bottom = 128.0
-theme_override_fonts/normal_font = ExtResource("7_al7kf")
+theme_override_fonts/normal_font = ExtResource("7_vrb5f")
 theme_override_font_sizes/normal_font_size = 32
-text = "Level 0"
+text = "Level 2
+
+"
 
 [connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]

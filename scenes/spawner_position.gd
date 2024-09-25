@@ -1,4 +1,5 @@
 extends SpawnerBase
+class_name SpawnerPosition
 
 var marker_nodes: Array[Marker2D];
 var enemy_index: int = 0;

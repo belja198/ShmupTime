@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bovdggq1gkfhj"]
+
+[ext_resource type="PackedScene" uid="uid://c07ditq2pxsxt" path="res://scenes/enemy_base.tscn" id="1_omtfi"]
+[ext_resource type="Script" path="res://scenes/enemy_regular.gd" id="2_dqjom"]
+[ext_resource type="Texture2D" uid="uid://71v2y73ruva3" path="res://sprites/ship_28.png" id="3_n51ml"]
+[ext_resource type="PackedScene" uid="uid://dvy7na4ysyy8" path="res://scenes/shooter.tscn" id="4_tppu7"]
+[ext_resource type="PackedScene" uid="uid://wyssqmiyv4rg" path="res://scenes/projectile_enemy_simple.tscn" id="5_i83bg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b561"]
+size = Vector2(96, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfhhg"]
+size = Vector2(96, 64)
+
+[node name="EnemyRegular" instance=ExtResource("1_omtfi")]
+script = ExtResource("2_dqjom")
+speed = 350.0
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -18)
+texture = ExtResource("3_n51ml")
+flip_v = true
+
+[node name="HealthBox" parent="." index="1"]
+max_health = 350.0
+
+[node name="CollisionShape2D" parent="HealthBox" index="0"]
+shape = SubResource("RectangleShape2D_0b561")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="CollisionShape2D" parent="DamageBox" index="0"]
+shape = SubResource("RectangleShape2D_yfhhg")
+
+[node name="Shooter1" parent="." index="3" instance=ExtResource("4_tppu7")]
+position = Vector2(-30, 44)
+projectile_tscn = ExtResource("5_i83bg")
+
+[node name="Shooter2" parent="." index="4" instance=ExtResource("4_tppu7")]
+position = Vector2(30, 44)
+projectile_tscn = ExtResource("5_i83bg")

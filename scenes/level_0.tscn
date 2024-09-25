@@ -45,14 +45,14 @@ scale = Vector2(1920, 1080)
 texture = SubResource("CanvasTexture_8rf5d")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="LeftForeground" type="Sprite2D" parent="."]
 modulate = Color(0.152941, 0.152941, 0.152941, 1)
 z_index = 10
 position = Vector2(105, 540)
 scale = Vector2(1010, 1080)
 texture = SubResource("CanvasTexture_55tbh")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="RightForeground" type="Sprite2D" parent="."]
 modulate = Color(0.152941, 0.152941, 0.152941, 1)
 z_index = 10
 position = Vector2(1980, 540)

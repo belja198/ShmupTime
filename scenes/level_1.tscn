@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnqv0l3tcoda0"]
+[gd_scene load_steps=16 format=3 uid="uid://bnqv0l3tcoda0"]
 
 [ext_resource type="PackedScene" uid="uid://pgou6i4q6d0m" path="res://scenes/player.tscn" id="1_5grsf"]
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_6ikq8"]
 [ext_resource type="PackedScene" uid="uid://cvicvnkg0tpif" path="res://scenes/spawner_path.tscn" id="2_mx1gn"]
+[ext_resource type="PackedScene" uid="uid://ioniv52qb0ur" path="res://scenes/level_2.tscn" id="2_ut2x7"]
 [ext_resource type="PackedScene" uid="uid://cu750blra1ooo" path="res://scenes/spawner_position.tscn" id="4_kc6no"]
 [ext_resource type="PackedScene" uid="uid://bovdggq1gkfhj" path="res://scenes/enemy_regular.tscn" id="4_u8se2"]
 [ext_resource type="PackedScene" uid="uid://c5j8grq06wxih" path="res://scenes/enemy_kamikaze.tscn" id="5_10f45"]
@@ -33,6 +34,7 @@ point_count = 8
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6ikq8")
+next_level_tscn = ExtResource("2_ut2x7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

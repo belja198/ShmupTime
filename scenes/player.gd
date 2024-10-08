@@ -7,7 +7,6 @@ class_name Player
 @onready var firing_point_2: Node2D = $FirePoint2;
 var can_shoot: bool = true;
 
-@export var my_time_scale: float = 1.0;
 @export var lives: int = 3;
 
 @onready var invincible_timer: Timer = $InvincibleTimer;
@@ -42,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	move_vector = Vector2(direction_x, direction_y);
 	move_vector = move_vector.normalized();
 	
-	velocity = move_vector * speed * my_time_scale;
+	velocity = move_vector * speed;
 	move_and_slide()
 	
 	

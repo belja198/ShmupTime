@@ -1,9 +1,8 @@
 extends Area2D
 class_name HealthBox
 
-
 @export var max_health: float = 50.0;
-@export var curr_health: float = 50.0;
+var curr_health: float = 50.0;
 
 signal health_deplted;
 

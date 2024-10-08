@@ -10,11 +10,9 @@ class_name ProjectileBase
 func _ready() -> void:
 	damage_box.damage_collided.connect(_on_damage_collided);
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	move_projectile(delta);
-
 
 func move_projectile(delta: float) -> void:
 	position += direction.normalized() * speed * delta;
